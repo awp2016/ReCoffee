@@ -28,6 +28,11 @@ def login_view(request):
 	context['form'] = form
 	return render(request, 'ReCoffee/login.html', context)
 
+def logout_view(request):
+	if request.method == 'GET':
+		logout(request)
+		return redirect('index')
+
 '''
 def search_view(request):
 	context = {}

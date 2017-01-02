@@ -11,7 +11,16 @@
 <h1 id="logo">ReCoffee</h1>
 
 <nav>
+	{% if user.username %}
+	<div class="dropdown">
+		<a href="profile.html" class="dropbtn">{{ user.username }}</a>
+		<div class="content">
+			<a href="{% url 'logout' %}">Logout</a>
+		</div>
+	</div>
+	{% else %}
 	<a href="login.html">Login</a>
+	{% endif %}
 </nav>
 
 <div class="homepage">
