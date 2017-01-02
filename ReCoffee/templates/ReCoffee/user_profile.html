@@ -1,0 +1,13 @@
+{% extends 'ReCoffee/base.html' %}
+
+{% block content %}
+
+{% block head%} <h1> {{ user.username }} </h1>
+<article class="profile">
+	<span> First name: {{ user.profile.first_name }} </span>
+	<br><span> Last name: {{ user.profile.last_name }} </span>
+	<br><span> Birthday: {{ user.profile.birthday }} </span>
+</article>
+{% endblock %}
+
+{% endblock %}

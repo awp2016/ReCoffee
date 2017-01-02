@@ -1,27 +1,6 @@
-<!DOCTYPE html>
+{% extends 'ReCoffee/base.html' %}
 
-<html land="en">
-<head>
-	<title>ReCoffee</title>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-</head>
-
-<body>
-<h1 id="logo">ReCoffee</h1>
-
-<nav>
-	{% if user.username %}
-	<div class="dropdown">
-		<a href="profile.html" class="dropbtn">{{ user.username }}</a>
-		<div class="content">
-			<a href="{% url 'logout' %}">Logout</a>
-		</div>
-	</div>
-	{% else %}
-	<a href="login.html">Login</a>
-	{% endif %}
-</nav>
+{% block content %}
 
 <div class="homepage">
 	<form class="search-form" method="GET">
@@ -30,5 +9,4 @@
 	</form>
 </div>
 
-</body>
-</html>
+{% endblock %}

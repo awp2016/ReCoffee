@@ -1,0 +1,26 @@
+{% extends 'ReCoffee/base.html' %}
+
+{% block content %}
+
+<nav>
+	{% if user.username %}
+	<div class="dropdown">
+		<a href="#" class="dropbtn">{{ user.username }}</a>
+		<div class="content">
+			<a href="{% url 'user_profile' user.profile.pk %}">Profile</a>
+			<a href="{% url 'logout' %}">Logout</a>
+		</div>
+	</div>
+	{% else %}
+	<a href="login.html">Login</a>
+	{% endif %}
+</nav>
+
+{% for shop in result_list %}
+<div class="result">
+{{% shop.name %}}
+<br><a href="{% url 'shop_page' shop.pk %}">Details</a>
+
+{% endfor %}
+
+{% endblock %}
