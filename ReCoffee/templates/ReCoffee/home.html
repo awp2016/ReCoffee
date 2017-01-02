@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html land="en">
+<head>
+	<title>ReCoffee</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+<h1 id="logo">ReCoffee</h1>
+
+<nav>
+	<a href="login.html">Login</a>
+</nav>
+
+<div class="homepage">
+	<form class="search-form" method="GET">
+		{{form.as_p}}
+		<button class="button" type="submit">Search</button>
+	</form>
+</div>
+
+</body>
+</html>
