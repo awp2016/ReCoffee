@@ -5,4 +5,4 @@ class LoginForm(forms.Form):
 	password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
 class SearchForm(forms.Form):
-	shop_name = forms.CharField(label="Search for shop")
+	shop_name = forms.CharField(label="")

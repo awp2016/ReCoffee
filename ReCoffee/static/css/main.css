@@ -1,35 +1,46 @@
-body{
-	font-family: Helvetica;
-	/* culoare de fundal bej*/
-	background-color: #D9C9B3;
-	margin: 0;
-}
-
 a{
-	text-decoration: none;
 	/* culoare linkuri oranj*/
 	color: #FB9612; 
 	font-weight: bold;
+	text-decoration: none;
 }
+
+body{
+	/* culoare de fundal bej*/
+	background-color: #D9C9B3;
+	font-family: Helvetica;
+	margin: 0;
+}
+
+.button{
+	cursor: pointer;
+}
+
+.search-form{
+	float: left;
+	padding-left: 15px;
+}
+
+/* Menu */
 
 nav{
 	/*meniu maro*/
 	background-color: #52352E; 
-	padding: 0.6em;
+	font-size: 1.2em;
+	font-weight: bold;
 	margin: auto;
+	padding: 0.6em;
 	position: relative;
 	text-align: right;
-	font-weight: bold;
-	font-size: 1.2em;
 }
 
 nav a{
-	padding: 1em;
-	width: 4.5em;
-	margin-left: 1.25em;
-	text-align: center;
 	display: inline-block;
+	margin-left: 1.25em;
+	padding: 1em;
+	text-align: center;
 	transition: background-color 0.5s;
+	width: 4.5em;
 }
 
 nav a:link, a:visited{
@@ -42,46 +53,35 @@ nav a:hover, a:active{
 	color: #52352E;
 }
 
-.profile{
-	max-width: 300px;
-	padding: 3em;
-	border: 2px solid #52352E;
-	border-radius: 5px;
-}
-
-.button{
-	cursor: pointer;
-}
-
 .dropbtn{
 	cursor: pointer;
-	padding: 1em;
-	width: 4.5em;
-	margin-left: 1.25em;
-	text-align: center;
 	display: inline-block;
+	margin-left: 1.25em;
+	padding: 1em;
+	text-align: center;
 	transition: background-color 0.2s;
+	width: 4.5em;
 }
 
 .dropdown{
-	position: relative;
 	display: inline-block;
+	position: relative;
 }
 
 .content{
-	display: none;
-	position: absolute;
 	background-color: #52352E;
+	display: none;
 	min-width: 9em;
 	padding: 0.7em 0em;
+	position: absolute;
 }
 
 .content a {
-	padding: 1em 1.5em;
-	width: 4.5em;
-	display: block;
-	margin: auto;
 	color: #FB9612;
+	display: block;
+	padding: 1em 1.5em;
+	margin: auto;
+	width: 4.5em;
 }
 
 .dropdown:hover .content{
@@ -89,25 +89,52 @@ nav a:hover, a:active{
 	z-index: 1;
 }
 
-.homepage, .loginpage{
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.search-form, .login-form{
-	padding: 30px 70px;
-	box-shadow: 0px 0px 12px #ddd;
-	border-radius: 10px;
-	border: 1px solid #755A38; /* culoare margine search maro*/
-}
-
 #logo {
-	position: absolute;
 	float: left;
+    height: auto;
+	position: absolute;
+	width: 250px;
 	z-index: 2;
 }
 
+/* User Profile */
 
+.profile{
+	align-items: center;
+	border: 2px solid #52352E;
+	border-radius: 5px;
+	height: auto;
+	justify-content: center;
+	line-height: 200%;
+	margin: auto;
+	margin-top: 50px;
+	max-width: 75%;
+	padding: 10px;
+	position: relative;
+}
+
+#avatar{
+	float: right;
+	height: auto;
+	max-width: 200px;
+	max-height: 400px;
+	padding: 10px;
+}
+
+/* Login */
+
+.loginpage{
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	width: 100vw;
+}
+
+.login-form{
+	border-radius: 10px;
+	/* culoare margine search maro*/
+	border: 1px solid #755A38;
+	box-shadow: 0px 0px 12px #aaa;
+	padding: 30px 70px;
+}

@@ -9,8 +9,9 @@ from . import models
 from . import forms
 
 def index(request):
-	context = {}
-	return render (request, 'ReCoffee/home.html', context)
+	form = forms.SearchForm()
+	context = {'form':form,}
+	return render(request, 'ReCoffee/home.html', context)
 
 def login_view(request):
 	context = {}

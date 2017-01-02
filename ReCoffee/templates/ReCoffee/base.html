@@ -2,14 +2,15 @@
 
 <html land="en">
 <head>
-	<title>ReCoffee
-	</title>
+	<title>ReCoffee</title>
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 
 <body>
-<a href="{% url 'index' %}"><h1 id="logo">ReCoffee</h1></a>
+<a href="{% url 'index' %}">
+	<img src="{% static 'images/Recoffee-logo.png' %}" id="logo">
+</a>
 
 <nav>
 	{% if user.username %}
