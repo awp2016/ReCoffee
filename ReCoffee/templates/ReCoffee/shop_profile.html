@@ -1,0 +1,38 @@
+{% extends 'ReCoffee/base.html' %}
+
+{% block content %}
+
+{% block head%}
+<article class="profile">
+	<img src="{{ shop.profile.avatar.url }}" id="avatar">
+	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn">
+	<div class="annotation">Favorite</div>
+	<h1 class="shoptitle"> {{ shop.profile.name }} </h1>
+	<span> Location: {{ shop.profile.first_name }} </span>
+	<br><span> Rating: {{ shop.profile.rating }} </span>
+	<!-- PLace here option to give rating -->
+</article>
+
+{% if user.username %}
+<form method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input class="button" type="submit" value="Save"/>
+</form>
+{% endif %}
+
+{% for review in review_list %}
+<p>
+{{ review.text }}
+<small> by {% if user.profile %} 
+<a href="{% url 'user_profile' review.author.profile.pk %}">{{ review.author }}</a>
+{% else %}
+{{ review.author }}
+{% endif %}
+at {{ review.date_added }}
+</small>
+</p>
+
+{% endblock %}
+
+{% endblock %}

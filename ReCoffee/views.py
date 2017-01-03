@@ -41,10 +41,12 @@ def user_profile(request, pk):
 	return render(request, 'ReCoffee/user_profile.html', context)
 
 def shop_profile(request, pk):
+	form = forms.ReviewForm()
+	context = {'form':form,}
 	if request.method == 'GET':
 		shop_profile = models.ShopProfile.objects.get(pk=pk)
 	context = {'shop_profile': shop_profile,}
-	return render(request, 'ReCoffee/shop.html', context)
+	return render(request, 'ReCoffee/shop_profile.html', context)
 
 
 '''
