@@ -34,6 +34,10 @@ class UserProfile(models.Model):
         primary_key=True,
         related_name='profile')
 
+class Favorite(models.Model):
+    f_id = models.IntegerField(default=0)
+    username = models.CharField(max_length=20)
+    shop_name = models.CharField(max_length=20)
 
 #modified
 
