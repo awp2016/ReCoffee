@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html land="en">
+<head>
+	<title>Register</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<title>Register</title>
+</head>
+
+<body>
+
+<h1 id="logo">ReCoffee</h1>
+
+<div class="registerpage">
+<form class="register-form" method="POST">
+	{% csrf_token %}
+    {{ formularul.as_ul }}
+	{{ error_message }}
+<button class="button" type="submit">Register</button>
+</form>
+</div>
+
+</body>
+</html>

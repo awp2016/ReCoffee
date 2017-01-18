@@ -15,17 +15,21 @@ def index(request):
     return render(request, 'ReCoffee/home.html', context)
 
 def register_view(request):
+    context = {}
     if request.method == 'POST':
-        formular = forms.LoginForm(request.POST)
-        if form.is_valid():
-            userName=form.cleaned_data['Username']
-            passWord=form.cleaned_data['Password']
-            firstName = form.cleaned_data['First Name']
-            lastName = form.cleaned_data['Last Name']
-            birthDay = form.cleaned_data['Birth Day']
+        formular = forms.RegisterForm(request.POST)
+        if formular.is_valid():
+            userName=formular.cleaned_data['userName']
+            passWord=formular.cleaned_data['passWord']
+            firstName = formular.cleaned_data['firstName']
+            lastName = formular.cleaned_data['lastName']
+            birthDay = formular.cleaned_data['birthDay']
             user = UserProfile.objects.create_user(firstName,lastName,birthDay,userName,passWord)
             user.save()
-        return redirect('index')
+    elif request.method == 'GET':
+        formular = forms.RegisterForm()
+    context['formularul'] = formular
+    return render(request, 'ReCoffee/register.html', context)
 
 def login_view(request):
     context = {}
