@@ -68,6 +68,17 @@ def shop_profile(request, pk):
     context = {'shop_profile': shop_profile,}
     return render(request, 'ReCoffee/shop_profile.html', context)
 
+def review_view(request):
+    context = {}
+    if request.method == 'POST':
+        form = forms.RegisterForm(request.POST)
+        if formular.is_valid():
+            text_review=form.cleaned_data['text_review']
+    elif request.method == 'GET':
+        formular = forms.ReviewForm()
+    context['formular_review'] = form
+    return render(request, 'ReCoffee/review.html', context)
+
 
 '''
 def search_view(request):

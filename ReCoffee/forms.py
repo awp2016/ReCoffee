@@ -12,7 +12,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
 class ReviewForm(forms.Form):
-    text = forms.CharField(label="Leave review",
+    text_review = forms.CharField(label="Leave review",
         widget=forms.Textarea)
 
 class SearchForm(forms.Form):

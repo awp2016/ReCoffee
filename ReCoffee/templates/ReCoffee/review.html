@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html land="en">
+<head>
+	<title>Review</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<title>Review</title>
+</head>
+<body>
+<h1 id="logo">ReCoffee</h1>
+<div class="reviewpage">
+<form class="review-form" method="POST">
+    {{ formular_review.as_ul }}
+<button class="button" type="submit">Review</button>
+</form>
+</div>
+</body>
+</html>

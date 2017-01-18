@@ -165,6 +165,22 @@ nav a:hover, a:active{
 	padding: 30px 70px;
 }
 
+/* Review */
+.reviewpage{
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	width: 100vw;
+}
+
+.review-form{
+	border-radius: 10px;
+	border: 1px solid #755A38;
+	box-shadow: 0px 0px 12px #aaa;
+	padding: 30px 70px;
+}
+
 /* General styles */
 a{
 	/* culoare linkuri oranj*/
