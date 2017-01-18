@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
+from django.contrib.auth.models import User
 
 from . import models
 from . import forms
@@ -12,6 +13,19 @@ def index(request):
     form = forms.SearchForm()
     context = {'form':form,}
     return render(request, 'ReCoffee/home.html', context)
+
+def register_view(request):
+    if request.method == 'POST':
+        formular = forms.LoginForm(request.POST)
+        if form.is_valid():
+            userName=form.cleaned_data['Username']
+            passWord=form.cleaned_data['Password']
+            firstName = form.cleaned_data['First Name']
+            lastName = form.cleaned_data['Last Name']
+            birthDay = form.cleaned_data['Birth Day']
+            user = UserProfile.objects.create_user(firstName,lastName,birthDay,userName,passWord)
+            user.save()
+        return redirect('index')
 
 def login_view(request):
     context = {}
