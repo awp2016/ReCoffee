@@ -5,7 +5,6 @@ from django.core.urlresolvers import reverse
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
-
 from . import models
 from . import forms
 
@@ -24,7 +23,9 @@ def register_view(request):
             firstName = formular.cleaned_data['firstName']
             lastName = formular.cleaned_data['lastName']
             birthDay = formular.cleaned_data['birthDay']
-            user = UserProfile.objects.create_user(firstName,lastName,birthDay,userName,passWord)
+
+            #dupa ce apesi submit, eroare: << global name 'UserProfile' is not defined >>
+            user = UserProfile.objects.create(firstName,lastName,birthDay,userName,passWord)
             user.save()
     elif request.method == 'GET':
         formular = forms.RegisterForm()
