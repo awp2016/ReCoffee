@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
 
 from . import models
 from . import forms
@@ -17,10 +18,10 @@ import json
 def index(request):
     context = {}
 
-    #modificare by bogdan
+    # modificare by bogdan
     rate = models.ShopProfile.objects.all().order_by('rating').reverse()
     context['rate'] = rate
-    #end modificare bogdan
+    # end modificare bogdan
 
     if request.method == 'GET':
         form = forms.SearchForm()
@@ -83,7 +84,7 @@ def login_view(request):
                 context['error_message'] = 'Wrong username or password!'
     context['form'] = form
 
-    #if not is_safe_url(url=redirect_to, host=request.get_host()):
+    # if not is_safe_url(url=redirect_to, host=request.get_host()):
     #redirect_to = request.POST.get('next', request.GET.get('next', '/'))
     return render(request, 'ReCoffee/login.html', context)
 
@@ -95,15 +96,24 @@ def logout_view(request):
 
 
 def user_profile(request, pk):
-    if request.method == 'GET':
-        user_profile = models.UserProfile.objects.get(pk=pk)
-    context = {'user_profile': user_profile, }
+    user_profile = models.UserProfile.objects.get(pk=pk)
+    fave_list = user_profile.favorite.all()
+    context = {'user_profile': user_profile, 'fave_list': fave_list, }
     return render(request, 'ReCoffee/user_profile.html', context)
 
 
 def shop_profile(request, pk):
     context = {}
     shop = models.ShopProfile.objects.get(pk=pk)
+    review_list = models.Review.objects.filter(shop=shop)
+    user_profile = models.UserProfile.objects.get(user=request.user)
+
+
+    try:
+        exist = models.Favorite.objects.get(user=user_profile, shop=shop)
+        flag = True
+    except ObjectDoesNotExist:
+        flag = False
 
     if request.method == 'GET':
         form = forms.ReviewForm()
@@ -112,7 +122,6 @@ def shop_profile(request, pk):
         if form.is_valid():
             text = form.cleaned_data['text']
             rating = form.cleaned_data['rating']
-            user_profile = models.UserProfile.objects.get(user=request.user)
             last_rating = shop.rating
 
             shop.rating = (last_rating + int(rating)) / 2
@@ -125,13 +134,16 @@ def shop_profile(request, pk):
 
     context['shop'] = shop
     context['form'] = form
+    context['review_list'] = review_list
+    context['flag'] = flag
     return render(request, 'ReCoffee/shop_profile.html', context)
 
 
 def add_fave(request, shop_pk):
     user = request.user
-    profile = models.UserProfile.get(user=user)
-    shop = models.ShopProfile.get(pk=shop_pk)
-    new_fave = models.Favorite(user=profile, shop=shop_pk)
+    profile = models.UserProfile.objects.get(user=user)
+    shop = models.ShopProfile.objects.get(pk=shop_pk)
+    new_fave = models.Favorite(user=profile, shop=shop)
     new_fave.save()
 
+    return redirect('user_profile', profile.pk)

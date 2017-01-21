@@ -9,6 +9,10 @@
 	<span> First name: {{ user_profile.first_name }} </span>
 	<br><span> Last name: {{ user_profile.last_name }} </span>
 	<br><span> Birthday: {{ user_profile.birthday }} </span>
+	{% for fave in fave_list %}
+		<br>
+		<a href="{% url 'shop_profile' fave.shop.pk %}"> {{ fave.shop.name }}</a>
+	{% endfor %}
 </article>
 {% endblock %}
 
