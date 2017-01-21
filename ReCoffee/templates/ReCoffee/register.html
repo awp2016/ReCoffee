@@ -1,16 +1,6 @@
-<!DOCTYPE html>
+{% extends 'ReCoffee/base.html' %}
 
-<html land="en">
-<head>
-	<title>Register</title>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<title>Register</title>
-</head>
-
-<body>
-
-<h1 id="logo">ReCoffee</h1>
+{% block content %}
 
 <div class="registerpage">
 <form class="register-form" method="POST">
@@ -21,5 +11,4 @@
 </form>
 </div>
 
-</body>
-</html>
+{% endblock %}
