@@ -30,7 +30,6 @@ def index(request):
         form = forms.SearchForm(request.POST)
         if form.is_valid():
             shopSearch = form.cleaned_data['shopSearch']
-            # context['shopSearch'] = shopSearch
             return redirect('lista_cafenele', shopSearch)
 
     context['form'] = form
@@ -39,10 +38,11 @@ def index(request):
 
 def lista_cafenele_view(request, shopSearch):
     context = {}
-    # p = models.ShopProfile.objects.get(
-    #     Q(name__icontains=shopSearch) | Q(location__icontains=shopSearch))
     lista = models.ShopProfile.objects.filter(name__icontains=shopSearch)
-    context['listaCafenele'] = lista
+    if not lista:
+        context['errormessage'] = 'Not found!'
+    else:
+        context['listaCafenele'] = lista
     return render(request, 'ReCoffee/lista_cafenele.html', context)
 
 
@@ -108,15 +108,12 @@ def shop_profile(request, pk):
     context['shop'] = shop_profile
     context['form'] = form
     return render(request, 'ReCoffee/shop_profile.html', context)
-'''
-def add_favorite(request):
-    context = {}
-    if request.method == 'POST':
-        fav = forms.RegisterForm(request.POST)
-        if fav.is_valid():
-            userName = formular.cleaned_data['userName']
-            shopProfile = formular.cleaned_data['shopProfile']
-    context['fav'] = fav
-    return render(request, 'ReCoffee/user_profile.html', context)
 
-'''
+
+def add_fave(request, shop_pk):
+    user = request.user
+    profile = models.UserProfile.get(user=user)
+    shop = models.ShopProfile.get(pk=shop_pk)
+    new_fave = models.Favorite(user=profile, shop=shop_pk)
+    new_fave.save()
+

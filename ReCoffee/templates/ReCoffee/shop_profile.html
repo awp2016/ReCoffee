@@ -1,5 +1,8 @@
 {% extends 'ReCoffee/base.html' %}
+
 {% load static %}
+
+
 {% block content %}
 
 <article class="profile">
@@ -19,7 +22,7 @@
 </form>
 {% endif %}
 
-{% for review in review_list %}
+{% for review in form %}
 <p>
 {{ review.text }}
 <small> by {% if user.profile %} 
