@@ -11,15 +11,20 @@ from django.http import HttpResponseRedirect
 
 from . import models
 from models import UserProfile
+from models import ShopProfile
 from . import forms
 import json
 
 
 def index(request):
-    #modificare by bogdan
-    mn = ShopProfile.filter(
-    #end modificare bogdan
     context = {}
+
+    #modificare by bogdan
+    rate = ShopProfile.objects.all().order_by('rating').reverse()
+    context['rate'] = rate
+    print rate
+
+    #end modificare bogdan
 
     if request.method == 'GET':
         form = forms.SearchForm()
