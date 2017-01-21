@@ -4,6 +4,7 @@
 
 	
 	<form class="search-form" method="GET">
+		{% csrf_token %}
 		{{ form }}
 		<button class="button" type="submit">Search</button>
 	</form>
