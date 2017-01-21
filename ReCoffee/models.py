@@ -40,7 +40,7 @@ class Favorite(models.Model):
     user = models.ForeignKey(UserProfile, related_name = 'favorite')
     shop = models.ForeignKey(ShopProfile,related_name = 'favorite')
 
-	class Meta:
+    class Meta:
     	unique_together = ('user','shop')
 
 
