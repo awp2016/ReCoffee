@@ -20,13 +20,6 @@ class ShopProfile(models.Model):
         return reverse('shop_page', kwargs={'pk': self.pk})
 
 
-class Review(models.Model):
-    text = models.CharField(max_length=300)
-    date_added = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User)
-    shop = models.ForeignKey(ShopProfile)
-
-
 class UserProfile(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
@@ -39,6 +32,13 @@ class UserProfile(models.Model):
 
     class Meta:
         verbose_name_plural = 'User Profiles'
+
+
+class Review(models.Model):
+    text = models.CharField(max_length=300)
+    date_added = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(UserProfile, related_name='review')
+    shop = models.ForeignKey(ShopProfile, related_name='review')
 
 
 class Favorite(models.Model):
