@@ -112,6 +112,8 @@ nav a:hover, a:active{
 .dropdown:hover .annotation{
 	display: block;
 	z-index: 1;
+	top: -11px;
+	cursor: pointer;
 }
 
 .shop-title{
@@ -192,4 +194,15 @@ body{
 }
 .link{
 	cursor:pointer;
+}
+
+.boaba {
+	position: absolute;
+top:30px;
+cursor: pointer;
+    z-index: 999;
+
+}
+.shoptitle {
+ 	margin-left: 30px;
 }
