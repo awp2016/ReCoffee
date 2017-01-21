@@ -14,7 +14,11 @@
 	<h1 class="shoptitle"> {{ shop.name }} </h1>
 	<span> Location: {{ shop.location }} </span>
 	<br><span> Rating: {{ shop.rating }} </span>
+	<p style="font-size: 22px; font-style: bold;">
+	<a href="{% url 'index' %}">Go home</a>
+	</p>
 </article>
+
 
 {% if user.username %}
 <form method="POST">
@@ -27,12 +31,10 @@
 {% for review in form %}
 <p>
 {{ review.text }}
-<small> by {% if user.profile %} 
+<small>  {% if user.profile %} by
 <a href="{% url 'user_profile' review.author.profile.pk %}">{{ review.author }}</a>
-{% else %}
-{{ review.author }}
-{% endif %}
 at {{ review.date_added }}
+{% endif %}
 </small>
 </p>
 {% endfor %}

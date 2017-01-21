@@ -105,7 +105,7 @@ def shop_profile(request, pk):
     context = {}
     if request.method == 'GET':
         shop_profile = models.ShopProfile.objects.get(pk=pk)
-    context['shop'] = shop_profile
+        context['shop'] = shop_profile
     context['form'] = form
     return render(request, 'ReCoffee/shop_profile.html', context)
 
