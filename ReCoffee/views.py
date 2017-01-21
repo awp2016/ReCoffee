@@ -65,7 +65,7 @@ def logout_view(request):
 
 def user_profile(request, pk):
     if request.method == 'GET':
-        user_pofile = models.UserProfile.objects.get(pk=pk)
+        user_profile = models.UserProfile.objects.get(pk=pk)
     context = {'user_profile': user_profile, }
     return render(request, 'ReCoffee/user_profile.html', context)
 
