@@ -10,11 +10,6 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 
 from . import models
-<<<<<<< HEAD
-=======
-from models import UserProfile
-from models import ShopProfile
->>>>>>> 282b969b3b2617d0d2009c7000ce4c2da32ab90d
 from . import forms
 import json
 
@@ -23,7 +18,7 @@ def index(request):
     context = {}
 
     #modificare by bogdan
-    rate = ShopProfile.objects.all().order_by('rating').reverse()
+    rate = models.ShopProfile.objects.all().order_by('rating').reverse()
     context['rate'] = rate
     #end modificare bogdan
 
