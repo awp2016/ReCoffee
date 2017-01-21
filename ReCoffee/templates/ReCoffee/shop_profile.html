@@ -1,11 +1,10 @@
 {% extends 'ReCoffee/base.html' %}
-
+{% load static %}
 {% block content %}
 
-{% block head%}
 <article class="profile">
 	<img src="{{ shop.profile.avatar.url }}" id="avatar">
-	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn">
+	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn"/>
 	<div class="annotation">Favorite</div>
 	<h1 class="shoptitle"> {{ shop.profile.name }} </h1>
 	<span> Location: {{ shop.profile.first_name }} </span>
@@ -32,7 +31,6 @@
 at {{ review.date_added }}
 </small>
 </p>
-
-{% endblock %}
+{% endfor %}
 
 {% endblock %}
