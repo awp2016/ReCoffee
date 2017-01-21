@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 from . import models
 from models import UserProfile
@@ -51,10 +52,13 @@ def register_view(request):
             birthDay = formular.cleaned_data['birthDay']
             userNou = User.objects.create_user(username = userName, password = passWord)
             userProfil = UserProfile.objects.create(first_name = firstName,last_name = lastName,birthday = birthDay,user = userNou)
+            return HttpResponseRedirect("/")
     elif request.method == 'GET':
         formular = forms.RegisterForm()
     context['formularul'] = formular
     return render(request, 'ReCoffee/register.html', context)
+    
+
 
 
 def login_view(request):
@@ -74,6 +78,7 @@ def login_view(request):
                 context['error_message'] = 'Wrong username or password!'
     context['form'] = form
     return render(request, 'ReCoffee/login.html', context)
+ 
 
 
 def logout_view(request):

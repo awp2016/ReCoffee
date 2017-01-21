@@ -2,11 +2,11 @@ from django import forms
 
 
 class RegisterForm(forms.Form):
-    userName = forms.CharField(label="Username")
-    firstName = forms.CharField(label="First Name")
-    lastName = forms.CharField(label="Last Name")
+    userName = forms.CharField(label="Username",widget=forms.TextInput(attrs={'placeholder': 'username'}))
+    firstName = forms.CharField(label="First Name",widget=forms.TextInput(attrs={'placeholder': 'Prenume'}))
+    lastName = forms.CharField(label="Last Name",widget=forms.TextInput(attrs={'placeholder': 'Nume'}))
     passWord = forms.CharField(label="Password", widget=forms.PasswordInput)
-    birthDay = forms.DateField(label='Birth Day', input_formats=['%Y-%m-%d'])
+    birthDay = forms.DateField(label="Birth Day", input_formats=['%d-%m-%Y'],widget=forms.TextInput(attrs={'placeholder': 'Day-Mon-Year'}))
 
 
 class LoginForm(forms.Form):
