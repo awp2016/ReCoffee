@@ -17,7 +17,7 @@ class LoginForm(forms.Form):
 class ReviewForm(forms.Form):
     text = forms.CharField(label="Leave review",
                            widget=forms.Textarea)
-
+    rating = forms.ChoiceField(choices=[(x, x) for x in range(1, 10)],label="Rating")
 
 class FavoriteForm(forms.Form):
     username = forms.CharField(label="Username")
