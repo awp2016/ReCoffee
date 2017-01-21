@@ -190,3 +190,6 @@ body{
 	float:left;
 	text-align:center;
 }
+.link{
+	cursor:pointer;
+}
