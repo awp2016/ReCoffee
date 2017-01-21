@@ -96,19 +96,15 @@ def shop_profile(request, pk):
         shop_profile = models.ShopProfile.objects.get(pk=pk)
     context = {'shop_profile': shop_profile, }
     return render(request, 'ReCoffee/shop_profile.html', context)
+
+def add_fave(request, shop_pk):
+    user = request.user
+    profile = models.UserProfile.get(user=user)
+    shop = models.ShopProfile.get(pk=shop_pk)
+    new_fave = models.Favorite(user=profile, shop=shop_pk)
+    new_fave.save()
+
 '''
-def add_favorite(request):
-    context = {}
-    if request.method == 'POST':
-        fav = forms.RegisterForm(request.POST)
-        if fav.is_valid():
-            userName = formular.cleaned_data['userName']
-            shopProfile = formular.cleaned_data['shopProfile']
-    context['fav'] = fav
-    return render(request, 'ReCoffee/user_profile.html', context)
-
-
-
 def search_view(request):
     context = {}
     p = []

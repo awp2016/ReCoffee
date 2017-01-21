@@ -1,12 +1,18 @@
 {% extends 'ReCoffee/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 {% block head%}
 <article class="profile">
-	<img src="{{ shop.profile.avatar.url }}" id="avatar">
+	{% if user.username %}
+	<a href="{% url 'faved' shop.pk %}"><img src="{{ shop.profile.avatar.url }}" id="avatar">
+	</a>
 	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn">
 	<div class="annotation">Favorite</div>
+	{% endif %}
+
 	<h1 class="shoptitle"> {{ shop.profile.name }} </h1>
 	<span> Location: {{ shop.profile.first_name }} </span>
 	<br><span> Rating: {{ shop.profile.rating }} </span>
@@ -32,6 +38,8 @@
 at {{ review.date_added }}
 </small>
 </p>
+
+{% endfor %}
 
 {% endblock %}
 
