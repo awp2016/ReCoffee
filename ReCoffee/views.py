@@ -10,8 +10,6 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 
 from . import models
-from models import UserProfile
-from models import ShopProfile
 from . import forms
 import json
 
@@ -20,7 +18,7 @@ def index(request):
     context = {}
 
     #modificare by bogdan
-    rate = ShopProfile.objects.all().order_by('rating').reverse()
+    rate = models.ShopProfile.objects.all().order_by('rating').reverse()
     context['rate'] = rate
     #end modificare bogdan
 
@@ -58,7 +56,7 @@ def register_view(request):
             birthDay = formular.cleaned_data['birthDay']
             userNou = User.objects.create_user(
                 username=userName, password=passWord)
-            userProfil = UserProfile.objects.create(
+            userProfil = models.UserProfile.objects.create(
                 first_name=firstName, last_name=lastName,
                 birthday=birthDay, user=userNou)
             return HttpResponseRedirect("/")
@@ -104,11 +102,28 @@ def user_profile(request, pk):
 
 
 def shop_profile(request, pk):
-    form = forms.ReviewForm()
     context = {}
+    shop = models.ShopProfile.objects.get(pk=pk)
+
     if request.method == 'GET':
-        shop_profile = models.ShopProfile.objects.get(pk=pk)
-    context['shop'] = shop_profile
+        form = forms.ReviewForm()
+    if request.method == 'POST':
+        form = forms.ReviewForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            rating = form.cleaned_data['rating']
+            user_profile = models.UserProfile.objects.get(user=request.user)
+            last_rating = shop.rating
+
+            shop.rating = (last_rating + int(rating)) / 2
+            shop.save()
+
+            review = models.Review(text=text, author=user_profile, shop=shop)
+            review.save()
+
+            return redirect('shop_profile', shop.pk)
+
+    context['shop'] = shop
     context['form'] = form
     return render(request, 'ReCoffee/shop_profile.html', context)
 
