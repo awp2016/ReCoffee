@@ -6,10 +6,9 @@
 	<img src="{{ shop.profile.avatar.url }}" id="avatar">
 	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn"/>
 	<div class="annotation">Favorite</div>
-	<h1 class="shoptitle"> {{ shop.profile.name }} </h1>
-	<span> Location: {{ shop.profile.first_name }} </span>
-	<br><span> Rating: {{ shop.profile.rating }} </span>
-	<!-- PLace here option to give rating -->
+	<h1 class="shoptitle"> {{ shop.name }} </h1>
+	<span> Location: {{ shop.location }} </span>
+	<br><span> Rating: {{ shop.rating }} </span>
 </article>
 
 {% if user.username %}
