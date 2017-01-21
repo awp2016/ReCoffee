@@ -49,8 +49,10 @@ def register_view(request):
             firstName = formular.cleaned_data['firstName']
             lastName = formular.cleaned_data['lastName']
             birthDay = formular.cleaned_data['birthDay']
-            userNou = User.objects.create_user(username = userName, password = passWord)
-            userProfil = UserProfile.objects.create(first_name = firstName,last_name = lastName,birthday = birthDay,user = userNou)
+            userNou = User.objects.create_user(
+                username=userName, password=passWord)
+            userProfil = UserProfile.objects.create(
+                first_name=firstName, last_name=lastName, birthday=birthDay, user=userNou)
     elif request.method == 'GET':
         formular = forms.RegisterForm()
     context['formularul'] = formular
@@ -91,10 +93,11 @@ def user_profile(request, pk):
 
 def shop_profile(request, pk):
     form = forms.ReviewForm()
-    context = {'form': form, }
+    context = {}
     if request.method == 'GET':
         shop_profile = models.ShopProfile.objects.get(pk=pk)
-    context = {'shop_profile': shop_profile, }
+    context['shop'] = shop_profile
+    context['form'] = form
     return render(request, 'ReCoffee/shop_profile.html', context)
 '''
 def add_favorite(request):
@@ -107,24 +110,4 @@ def add_favorite(request):
     context['fav'] = fav
     return render(request, 'ReCoffee/user_profile.html', context)
 
-
-
-def search_view(request):
-    context = {}
-    p = []
-    listaCafenele = []
-    if request.method == 'GET':
-        shopform = forms.SearchForm()
-    elif request.method == 'POST':
-        shopform = forms.SearchForm(request.POST)
-        if shopform.is_valid():
-            shopSearch = shopform.cleaned_data['shopSearch']
-            p = ShopProfile.objects.get(
-                Q(name__icontains=shopSearch) | Q(location__icontains=shopSearch))
-            for i in p:
-                listaCafenele.append(i.name)
-            return JsonResponse(listaCafenele)
-
-    context['shopform'] = shopform
-    return render(request, 'ReCoffee/search.html', context)
 '''
