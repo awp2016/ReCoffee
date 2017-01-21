@@ -6,9 +6,9 @@
 <article class="profile">
 	<img src="{{ user.profile.avatar.url }}" id="avatar">
 	<h1> {{ user.username }} </h1>
-	<span> First name: {{ user.profile.first_name }} </span>
-	<br><span> Last name: {{ user.profile.last_name }} </span>
-	<br><span> Birthday: {{ user.profile.birthday }} </span>
+	<span> First name: {{ user_profile.first_name }} </span>
+	<br><span> Last name: {{ user_profile.last_name }} </span>
+	<br><span> Birthday: {{ user_profile.birthday }} </span>
 </article>
 {% endblock %}
 

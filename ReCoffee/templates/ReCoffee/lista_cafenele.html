@@ -2,12 +2,18 @@
 
 {% block content %}
 
-
 {% for shop in listaCafenele %}
-<div class="result">
+<div class="result" >
+  <p style="font-size: 22px; font-style: bold; margin-left:30px">
   {{ shop.name }}
-<br><a href="{% url 'shop_profile' shop.pk %}">Details</a>
-
+<br>
+<a href="{% url 'shop_profile' shop.pk %}">Details</a>
+</p>
 {% endfor %}
-
+<p style="font-size: 22px; font-style: bold; margin-left: 30px">
+	{{errormessage}}
+	<br/>
+	<a href="{% url 'index' %}">Go home</a>
+</p>
+</div>
 {% endblock %}

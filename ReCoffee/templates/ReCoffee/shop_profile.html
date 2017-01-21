@@ -1,15 +1,24 @@
 {% extends 'ReCoffee/base.html' %}
+
 {% load static %}
+
+
 {% block content %}
 
 <article class="profile">
+	<a href="{% url 'faved' shop.pk %}">
 	<img src="{{ shop.profile.avatar.url }}" id="avatar">
+	</a>
 	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn"/>
 	<div class="annotation">Favorite</div>
 	<h1 class="shoptitle"> {{ shop.name }} </h1>
 	<span> Location: {{ shop.location }} </span>
 	<br><span> Rating: {{ shop.rating }} </span>
+	<p style="font-size: 22px; font-style: bold;">
+	<a href="{% url 'index' %}">Go home</a>
+	</p>
 </article>
+
 
 {% if user.username %}
 <form method="POST">
@@ -19,15 +28,13 @@
 </form>
 {% endif %}
 
-{% for review in review_list %}
+{% for review in form %}
 <p>
 {{ review.text }}
-<small> by {% if user.profile %} 
+<small>  {% if user.profile %} by
 <a href="{% url 'user_profile' review.author.profile.pk %}">{{ review.author }}</a>
-{% else %}
-{{ review.author }}
-{% endif %}
 at {{ review.date_added }}
+{% endif %}
 </small>
 </p>
 {% endfor %}
