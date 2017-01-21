@@ -3,10 +3,12 @@
 {% block content %}
 
 	
-	<form class="search-form" method="GET">
-		{% csrf_token %}
-		{{ form }}
-		<button class="button" type="submit">Search</button>
+	<form class="search-form" method="POST">
+		<p>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class="button" type="submit">Search</button>
+		</p>
 	</form>
 
 

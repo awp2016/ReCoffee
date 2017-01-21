@@ -15,9 +15,28 @@ import json
 
 
 def index(request):
-    form = forms.SearchForm()
-    context = {'form': form, }
+    context = {}
+
+    if request.method == 'GET':
+        form = forms.SearchForm()
+    elif request.method == 'POST':
+        form = forms.SearchForm(request.POST)
+        if form.is_valid():
+            shopSearch = form.cleaned_data['shopSearch']
+            # context['shopSearch'] = shopSearch
+            return redirect('lista_cafenele', shopSearch)
+
+    context['form'] = form
     return render(request, 'ReCoffee/home.html', context)
+
+
+def lista_cafenele_view(request, shopSearch):
+    context = {}
+    # p = models.ShopProfile.objects.get(
+    #     Q(name__icontains=shopSearch) | Q(location__icontains=shopSearch))
+    lista = models.ShopProfile.objects.filter(name__icontains=shopSearch)
+    context['listaCafenele'] = lista
+    return render(request, 'ReCoffee/lista_cafenele.html', context)
 
 
 def register_view(request):
@@ -87,7 +106,7 @@ def add_favorite(request):
             shopProfile = formular.cleaned_data['shopProfile']
     context['fav'] = fav
     return render(request, 'ReCoffee/user_profile.html', context)
-'''
+
 
 
 def search_view(request):
@@ -107,4 +126,5 @@ def search_view(request):
             return JsonResponse(listaCafenele)
 
     context['shopform'] = shopform
-    return render(request, 'ReCoffee/results.html', context)
+    return render(request, 'ReCoffee/search.html', context)
+'''

@@ -1,0 +1,13 @@
+{% extends 'ReCoffee/base.html' %}
+
+{% block content %}
+
+
+{% for shop in listaCafenele %}
+<div class="result">
+  {{ shop.name }}
+<br><a href="{% url 'shop_profile' shop.pk %}">Details</a>
+
+{% endfor %}
+
+{% endblock %}
