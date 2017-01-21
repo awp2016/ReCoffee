@@ -15,7 +15,7 @@ class ReviewForm(forms.Form):
     text = forms.CharField(label="Leave review",
         widget=forms.Textarea)
 
-class FavoriteForm(fors.Form):
+class FavoriteForm(forms.Form):
 	username = forms.CharField(label="Username")
 	shopprofile = forms.CharField(label="Shop")
 
