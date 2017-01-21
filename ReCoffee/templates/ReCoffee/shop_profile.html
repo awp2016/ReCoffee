@@ -6,6 +6,7 @@
 {% block content %}
 
 <article class="profile">
+	<a href="{% url 'faved' shop.pk %}">
 	<img src="{{ shop.profile.avatar.url }}" id="avatar">
 	<small class="dropdown"><img src="{% static 'images/fave.png' %}" id="favebtn"/>
 	<div class="annotation">Favorite</div>
