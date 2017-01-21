@@ -16,6 +16,9 @@ import json
 
 
 def index(request):
+    #modificare by bogdan
+    mn = ShopProfile.filter(
+    #end modificare bogdan
     context = {}
 
     if request.method == 'GET':
