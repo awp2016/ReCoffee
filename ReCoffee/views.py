@@ -7,6 +7,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 from . import models
 from models import UserProfile
@@ -52,7 +53,9 @@ def register_view(request):
             userNou = User.objects.create_user(
                 username=userName, password=passWord)
             userProfil = UserProfile.objects.create(
-                first_name=firstName, last_name=lastName, birthday=birthDay, user=userNou)
+                first_name=firstName, last_name=lastName,
+                birthday=birthDay, user=userNou)
+            return HttpResponseRedirect("/")
     elif request.method == 'GET':
         formular = forms.RegisterForm()
     context['formularul'] = formular
