@@ -23,7 +23,7 @@ class ShopProfile(models.Model):
 class Review(models.Model):
     text = models.CharField(max_length=300)
     date_added = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(UserProfile related_name='review')
+    author = models.ForeignKey(UserProfile, related_name='review')
     shop = models.ForeignKey(ShopProfile, related_name='review')
 
 
