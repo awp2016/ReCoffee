@@ -2,6 +2,3 @@
 *~
 *.swp
 sandbox/
-*.db
-
-*.sqlite3
