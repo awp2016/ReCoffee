@@ -125,7 +125,8 @@ nav a:hover, a:active{
 
 /* Searches */
 .search-form{
-	float: left;
+	#float: center;
+	text-align:center;
 	padding-left: 15px;
 }
 
@@ -182,4 +183,10 @@ body{
 
 .button{
 	cursor: pointer;
+}
+
+#indexpag {
+	width:100%;
+	float:left;
+	text-align:center;
 }
