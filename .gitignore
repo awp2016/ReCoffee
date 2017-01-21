@@ -1,3 +1,7 @@
 *.pyc
 *~
 *.swp
+sandbox/
+*.db
+
+*.sqlite3

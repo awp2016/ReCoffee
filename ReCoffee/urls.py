@@ -13,4 +13,5 @@ urlpatterns = [
         name="user_profile"),
     url(r'^shop/(?P<pk>\d+)/$', views.shop_profile,
         name="shop_profile"),
+    url(r'^lista_cafenele/(?P<shopSearch>[\w\-]+)/$', views.lista_cafenele_view, name="lista_cafenele"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
