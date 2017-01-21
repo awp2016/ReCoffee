@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 
 from . import models
+from models import UserProfile
 from . import forms
 import json
 
@@ -29,9 +30,8 @@ def register_view(request):
             firstName = formular.cleaned_data['firstName']
             lastName = formular.cleaned_data['lastName']
             birthDay = formular.cleaned_data['birthDay']
-            user = UserProfile.objects.create_user(
-                firstName, lastName, birthDay, userName, passWord)
-            user.save()
+            userNou = User.objects.create_user(username = userName, password = passWord)
+            userProfil = UserProfile.objects.create(first_name = firstName,last_name = lastName,birthday = birthDay,user = userNou)
     elif request.method == 'GET':
         formular = forms.RegisterForm()
     context['formularul'] = formular
