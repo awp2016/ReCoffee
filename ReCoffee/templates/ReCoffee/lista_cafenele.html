@@ -2,7 +2,11 @@
 
 {% block content %}
 
-
+<p style="font-size: 22px; font-style: bold; margin-left: 30px">
+	{{errormessage}}
+	<br/>
+	<a href="{% url 'index' %}">Go home</a>
+</p>
 {% for shop in listaCafenele %}
 <div class="result">
   {{ shop.name }}

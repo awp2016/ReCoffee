@@ -24,7 +24,6 @@ def index(request):
         form = forms.SearchForm(request.POST)
         if form.is_valid():
             shopSearch = form.cleaned_data['shopSearch']
-            # context['shopSearch'] = shopSearch
             return redirect('lista_cafenele', shopSearch)
 
     context['form'] = form
@@ -33,10 +32,11 @@ def index(request):
 
 def lista_cafenele_view(request, shopSearch):
     context = {}
-    # p = models.ShopProfile.objects.get(
-    #     Q(name__icontains=shopSearch) | Q(location__icontains=shopSearch))
     lista = models.ShopProfile.objects.filter(name__icontains=shopSearch)
-    context['listaCafenele'] = lista
+    if not lista:
+        context['errormessage'] = 'Not found!'
+    else:
+        context['listaCafenele'] = lista
     return render(request, 'ReCoffee/lista_cafenele.html', context)
 
 
