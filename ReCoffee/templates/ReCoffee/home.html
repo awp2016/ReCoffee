@@ -1,8 +1,9 @@
 {% extends 'ReCoffee/base.html' %}
+{% load static %}
 
 {% block content %}
 
-	
+
 	<form class="search-form" method="POST">
 		<p>
 			{% csrf_token %}
@@ -11,5 +12,16 @@
 		</p>
 	</form>
 
+
+</br>
+</br>
+</br>
+</br>
+<h2 id="indexpag">Cele mai bine clasate cafenele</h2>
+<class id="indexpag">
+{% for i in rate %}
+<h3><a href="{% url 'shop_profile' i.pk %}"> {{ i.name }}</a>  ({{i.rating}})</h3>
+{% endfor %}
+</class>
 
 {% endblock %}

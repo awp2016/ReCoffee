@@ -22,8 +22,6 @@ def index(request):
     #modificare by bogdan
     rate = ShopProfile.objects.all().order_by('rating').reverse()
     context['rate'] = rate
-    print rate
-
     #end modificare bogdan
 
     if request.method == 'GET':
