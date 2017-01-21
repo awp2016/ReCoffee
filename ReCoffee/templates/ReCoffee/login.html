@@ -1,16 +1,7 @@
-<!DOCTYPE html>
+{% extends 'ReCoffee/base.html' %}
+{% block content %}
 
-<html land="en">
-<head>
-	<title>Login</title>
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<title>Login</title>
-</head>
-
-<body>
-
-<h1 id="logo">ReCoffee</h1>
+<h1 id="logo" style="text-align:center; width:100%; margin-top:100px;">Log In</h1>
 
 <div class="loginpage">
 <form class="login-form" method="POST">
@@ -21,5 +12,4 @@
 </form>
 </div>
 
-</body>
-</html>
+{% endblock %}
