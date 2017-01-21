@@ -5,9 +5,12 @@ from django.core.urlresolvers import reverse
 from django.views.generic.edit import DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.db.models import Q
+
 from . import models
 from . import forms
-
+import json
 def index(request):
     form = forms.SearchForm()
     context = {'form':form,}
@@ -23,9 +26,7 @@ def register_view(request):
             firstName = formular.cleaned_data['firstName']
             lastName = formular.cleaned_data['lastName']
             birthDay = formular.cleaned_data['birthDay']
-
-            #dupa ce apesi submit, eroare: << global name 'UserProfile' is not defined >>
-            user = UserProfile.objects.create(firstName,lastName,birthDay,userName,passWord)
+            user = UserProfile.objects.create_user(firstName,lastName,birthDay,userName,passWord)
             user.save()
     elif request.method == 'GET':
         formular = forms.RegisterForm()
@@ -68,17 +69,33 @@ def shop_profile(request, pk):
         shop_profile = models.ShopProfile.objects.get(pk=pk)
     context = {'shop_profile': shop_profile,}
     return render(request, 'ReCoffee/shop_profile.html', context)
-
-
+'''
+def add_favorite(request):
+    context = {}
+    if request.method == 'POST':
+        fav = forms.RegisterForm(request.POST)
+        if fav.is_valid():
+            userName = formular.cleaned_data['userName']
+            shopProfile = formular.cleaned_data['shopProfile']
+    context['fav'] = fav
+    return render(request, 'ReCoffee/user_profile.html', context)
 '''
 def search_view(request):
     context = {}
+    p = []
+    listaCafenele = []
     if request.method == 'GET':
-        form = forms.SearchForm()
+        shopform = forms.SearchForm()
     elif request.method == 'POST':
-        form = forms.SearchForm(request.POST)
-        if form.is_valid():
-            search = 
-    context['form'] = form
+        shopform = forms.SearchForm(request.POST)
+        if shopform.is_valid():
+            shopName = shopform.cleaned_data['shopName']
+            shopLocation = shopform.cleaned_data['shopLocation']
+            p = ShopProfile.objects.get(Q(name__icontains=shopName) | Q(location__icontains=shopLocation))
+            for i in p:
+                listaCafenele.append(i.name)
+            return JsonResponse(listaCafenele) 
+        
+    context['shopform'] = shopform
     return render(request, 'ReCoffee/results.html', context)
-'''
+
