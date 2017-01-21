@@ -33,12 +33,15 @@ class UserProfile(models.Model):
         User,
         primary_key=True,
         related_name='profile')
+    class Meta:
+    	verbose_name_plural = 'User Profiles'
 
 class Favorite(models.Model):
-    user_id = models.ForeignKey(User)
-    shop_id = models.ForeignKey(ShopProfile)
+    user = models.ForeignKey(UserProfile, related_name = 'favorite')
+    shop = models.ForeignKey(ShopProfile,related_name = 'favorite')
 
-class Meta:
-    unique_together = ('user_id','shop_id')
+	class Meta:
+    	unique_together = ('user','shop')
+
 
 
