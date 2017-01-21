@@ -16,9 +16,9 @@
 	{% endif %}
 </nav>
 
-{% for shop in result_list %}
+{% for shop in listaCafenele %}
 <div class="result">
-{{% shop.name %}}
+{{% shop %}}
 <br><a href="{% url 'shop_page' shop.pk %}">Details</a>
 
 {% endfor %}
