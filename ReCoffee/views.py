@@ -84,6 +84,9 @@ def login_view(request):
             else:
                 context['error_message'] = 'Wrong username or password!'
     context['form'] = form
+
+    #if not is_safe_url(url=redirect_to, host=request.get_host()):
+    #redirect_to = request.POST.get('next', request.GET.get('next', '/'))
     return render(request, 'ReCoffee/login.html', context)
 
 
