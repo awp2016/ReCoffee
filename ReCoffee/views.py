@@ -33,7 +33,10 @@ def index(request):
 def lista_cafenele_view(request, shopSearch):
     context = {}
     lista = models.ShopProfile.objects.filter(name__icontains=shopSearch)
-    context['listaCafenele'] = lista
+    if not lista:
+        context['errormessage'] = 'Not found!'
+    else:
+        context['listaCafenele'] = lista
     return render(request, 'ReCoffee/lista_cafenele.html', context)
 
 
